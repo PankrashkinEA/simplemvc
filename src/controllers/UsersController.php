@@ -1,8 +1,6 @@
 <?php 
 
-include_once ROOT . '/models/User.php';
-
-class UsersController
+class UsersController extends BaseController
 {
     public function actionIndex()
     {   
@@ -27,11 +25,22 @@ class UsersController
     {   
         if($_POST){
         $createUser = User::createUser();
-        header('Location: http://localhost/users/');
+        $this->redirect('/users/');
         }   
         require ROOT . '/views/users/usercreate.php';
         
         
+    }
+    
+    public function actionUpdate($id)
+    {
+            $userItems = User::getUserItemById($id);
+            $departmentList = Department::getDepartmentList();
+            if($_POST){
+                User::updateUser($id);
+                $this->redirect('/users/');
+            }
+            require_once(ROOT. '/views/users/userupdate.php');
     }
 
     public function actionDelete($id)
@@ -39,13 +48,5 @@ class UsersController
         $deleteUser = User::deleteUser($id);
     }
 
-    public function actionUpdate($id)
-    {
-            $userItems = User::getUserItemById($id);
-            if($_POST){
-                User::updateUser($id);
-                header('Location: /users/{$id}');
-            }
-            require_once(ROOT. '/views/users/userupdate.php');
-    }
+   
 }

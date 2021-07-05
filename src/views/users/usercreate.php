@@ -15,9 +15,13 @@
 
         <h2>Отдел</h2>
 
-        <div class="form-group">
-            <input type="number" class="form-control" id="department_id" name="department_id">
-        </div>
+        <select name="department_id">
+            <?php foreach($departmentList as $department) :?>
+                <option value="<?=$department['id']?>">
+                    <?=$department['name']?>
+                </option>
+            <?php endforeach; ?>
+        </select>
 
         <h2>Днюха</h2>
 
