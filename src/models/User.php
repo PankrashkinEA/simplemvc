@@ -10,7 +10,12 @@ class User
             
             $db = Db::getConnection();
         
-            $result = $db->query('SELECT * FROM users WHERE id = '. $id);
+            $result = $db->query('SELECT id, name,(SELECT name from department 
+                                                   WHERE department.id = users.department_id) 
+                                                   AS department_name, birthday, createted_at 
+                                  FROM users 
+                                  WHERE id = '. $id
+                                  );
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $usersItem = $result->fetch();
 
@@ -25,16 +30,14 @@ class User
             
             $usersList = array();
             $db = Db::getConnection();
-            $result = $db->query('SELECT id, name, department_id, birthday, createted_at FROM users ORDER BY id LIMIT 100');
+            $result = $db->query('SELECT id, name,(SELECT name from department 
+                                                   WHERE department.id = users.department_id) 
+                                                   AS department_name, birthday, createted_at 
+                                  FROM users ORDER BY id LIMIT 100');
 
             $i = 0;
             while($row = $result->fetch()){
-                $usersList[$i]['id'] = $row['id'];
-                $usersList[$i]['name'] = $row['name'];
-                $usersList[$i]['department_id'] = $row['department_id'];
-                $usersList[$i]['birthday'] = $row['birthday'];
-                $usersList[$i]['createted_at'] = $row['createted_at'];
-                $i++;
+                $usersList[] = $row;
             }
 
             return $usersList;
@@ -57,7 +60,12 @@ class User
         $department_id = $_POST['department_id'];
         $birthday = $_POST['birthday'];
         // Запрос к бд
-        $result = $db->query("INSERT INTO users (name,department_id, birthday) VALUES ('{$name}',{$department_id},'{$birthday}');");
+        // $result = $db->query("INSERT INTO users (name,department_id, birthday) VALUES ('{$name}',{$department_id},'{$birthday}');");
+        $result = $db->prepare("INSERT INTO users
+            (name, (SELECT name from department WHERE department.id = users.department_id) AS department_name, birthday)
+             VALUES(?, ?, ?);");
+        $execute = $result->execute([$name, $department_id, $birthday]);
+        return $execute;
         
 
     }
@@ -72,8 +80,12 @@ class User
             $name = $_POST['name'];
             $department_id = $_POST['department_id'];
             $birthday = $_POST['birthday'];
-            $result = $db->query("UPDATE users 
-            SET name='{$name}', department_id={$department_id}, birthday='{$birthday}' WHERE id = {$id};");
+            $result = $db->prepare("UPDATE users 
+            SET name=?, department_id=?, birthday=?
+            WHERE id = {$id};");
+            $execute = $result->execute([$name, $department_id, $birthday]);
+            return $execute;
+
 
     }
 

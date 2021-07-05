@@ -4,10 +4,16 @@
       <meta charset="utf-8">
       <title>Список сотрудников</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-      <table>
+    <div class="container">
+      <h2>Таблица работников</h2>
+      <p>Красивые стили из моего самого любимого HTML/CSS/JS фреймворка</p>            
+      <table class="table table-borderless">
         <thead>
           <tr>
             <th>id Сотрудника</th>
@@ -23,7 +29,7 @@
               <tr>                
                 <th><?= $user['id']; ?></th>
                 <th><?= $user['name']; ?></th>
-                <th><?= $user['department_id']; ?></th>
+                <th><?= $user['department_name']; ?></th>
                 <th><?= $user['birthday']; ?></th>
                 <th><?= $user['createted_at']; ?></th>
                 <th><a href="/users/<?= $user['id'];?>">Просмотр</a></th>
@@ -34,5 +40,6 @@
           <?php } ?>
         </tbody>
       </table>
-      <br/><a href="/create">Создать</a>
+    </div>
+  <br/><a href="/create">Создать</a>
 </html>

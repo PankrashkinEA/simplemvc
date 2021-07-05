@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <title>Редактировать пользователя</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
-    <link href="/templates/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+
 </head>
 <body>
 <h1>Редактировать</h1>
@@ -15,7 +14,17 @@
     <br>
     <br>
     <label for="department">Департамент:</label>
-    <input type="number" name="department_id" value="<?= $userItems['department_id'];?>">
+    <select name="department_id">
+        <?php foreach($departmentList as $department) :?>
+            <option value="<?=$department['id']?>"
+                <?php if ($userItems['id'] == $department['id']):?>
+                selected
+                <?php endif; ?>
+            >
+                <?=$department['name']?>
+            </option>
+        <?php endforeach; ?>
+    </select>
     <br>
     <br>
     <label for="birthday">День Рождения:</label>

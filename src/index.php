@@ -18,9 +18,8 @@ error_reporting(E_ALL);
 // 2. Подключение файлов системы
 
 define('ROOT', dirname(__FILE__));
-require_once(ROOT.'/components/router.php');
-require_once(ROOT.'/components/Db.php');
 
+include_once 'autoloader.php';
 
 // 3. Установка соединения с бд
 
@@ -30,6 +29,4 @@ require_once(ROOT.'/components/Db.php');
 
 $router = new Router();
 $router->run();
-
-//Автозагрузчик
 
