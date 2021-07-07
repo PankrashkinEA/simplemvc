@@ -11,7 +11,7 @@
     </head>
     <body>
     <div class="container">
-      <h2>Таблица работников</h2>
+      <h2><?= $departmentList['name']; ?></h2>
       <p>Красивые стили из моего самого любимого HTML/CSS/JS фреймворка</p>            
       <table class="table table-borderless">
         <thead>
@@ -22,7 +22,7 @@
             <th>Дата рождения</th>
             <th>Создан</th>
             <th>Что делаем?</th>
-            <th><a href="/departments/">Департаменты?</th>
+            <th><a href="/users/">Юзеры?</th>
           </tr>
         </thead>
         <tbody>
@@ -30,7 +30,6 @@
               <tr>                
                 <th><?= $user['id']; ?></th>
                 <th><?= $user['name']; ?></th>
-                <th><a href="/user/filter/<?= $user['department_id']; ?>"><?= $user['department_name']; ?></a></th>
                 <th><?= $user['birthday']; ?></th>
                 <th><?= $user['createted_at']; ?></th>
                 <th><a href="/user/<?= $user['id'];?>">Просмотр</a></th>
@@ -41,7 +40,5 @@
           <?php } ?>
         </tbody>
       </table>
-      <br/><button type="button" class="btn btn-success"><a href="/user/create">Создать</a></button>
     </div>
-  
 </html>
