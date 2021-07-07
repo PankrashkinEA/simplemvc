@@ -17,7 +17,7 @@
     <select name="department_id">
         <?php foreach($departmentList as $department) :?>
             <option value="<?=$department['id']?>"
-                <?php if ($userItems['id'] == $department['id']):?>
+                <?php if ($userItems['department_name'] == $department['name']):?>
                 selected
                 <?php endif; ?>
             >

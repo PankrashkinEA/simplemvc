@@ -5,7 +5,6 @@ class User
     public static function getUserItemById($id)
     {
         $id = intval($id);
-
         if($id){
             
             $db = Db::getConnection();
@@ -30,10 +29,10 @@ class User
             
             $usersList = array();
             $db = Db::getConnection();
-            $result = $db->query('SELECT id, name,(SELECT name from department 
-                                                   WHERE department.id = users.department_id) 
+            $result = $db->query('SELECT id, name,department_id,
+                                (SELECT name from department WHERE department.id = users.department_id) 
                                                    AS department_name, birthday, createted_at 
-                                  FROM users ORDER BY id LIMIT 100');
+                                                   FROM users ORDER BY id LIMIT 100');
 
             $i = 0;
             while($row = $result->fetch()){
@@ -49,6 +48,23 @@ class User
 
     }
 
+    public static function getDepUserList($depId)
+    {       
+            $id = intval($depId);
+            $usersList = [];
+            $db = Db::getConnection();
+            $result = $db->query("SELECT id, name, birthday, createted_at FROM users WHERE department_id = " . $depId . " ORDER BY id");
+                                 
+                                                    
+            while($row = $result->fetch()){
+                $usersList[] = $row;
+            }
+
+           
+            return $usersList;
+
+    }
+
     public static function createUser()
     {
         // Метод создания юзера
@@ -60,14 +76,19 @@ class User
         $department_id = $_POST['department_id'];
         $birthday = $_POST['birthday'];
         // Запрос к бд
-        // $result = $db->query("INSERT INTO users (name,department_id, birthday) VALUES ('{$name}',{$department_id},'{$birthday}');");
+        // $result = $db->prepare("INSERT INTO users
+        //                       (name, (SELECT name from department 
+        //                        WHERE department.id = users.department_id) AS department_name, birthday)
+        //                        VALUES(?, ?, ?);");
+        // $execute = $result->execute([$name, $department_id, $birthday]);
         $result = $db->prepare("INSERT INTO users
-            (name, (SELECT name from department WHERE department.id = users.department_id) AS department_name, birthday)
+            (name, department_id, birthday)
              VALUES(?, ?, ?);");
         $execute = $result->execute([$name, $department_id, $birthday]);
+        
+        // var_dump($execute);
         return $execute;
         
-
     }
 
     public static function updateUser($id)

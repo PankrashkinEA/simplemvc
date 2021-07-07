@@ -16,6 +16,7 @@
         <h2>Отдел</h2>
 
         <select name="department_id">
+        
             <?php foreach($departmentList as $department) :?>
                 <option value="<?=$department['id']?>">
                     <?=$department['name']?>
@@ -31,7 +32,6 @@
         <button type="submit">Создаём?</button>
         
         <a href="users">Передумал</a>
-        <?php exit(); ?>
       </form>
     </body>
 </html>

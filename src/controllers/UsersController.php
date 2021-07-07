@@ -21,23 +21,29 @@ class UsersController extends BaseController
         return true;
     }
 
+    public function actionFilter($id)
+    {
+        $usersList = User::getDepUserList($id);
+        $departmentList = Department::getDepartmentById($id);
+        require ROOT . '/views/users/userfilter.php';
+    }
     public function actionCreate()
     {   
+        $departmentList = Department::getDepartmentList();
         if($_POST){
         $createUser = User::createUser();
         $this->redirect('/users/');
         }   
         require ROOT . '/views/users/usercreate.php';
-        
-        
     }
-    
+
     public function actionUpdate($id)
     {
             $userItems = User::getUserItemById($id);
             $departmentList = Department::getDepartmentList();
             if($_POST){
                 User::updateUser($id);
+                // var_dump($_POST);
                 $this->redirect('/users/');
             }
             require_once(ROOT. '/views/users/userupdate.php');
@@ -45,7 +51,11 @@ class UsersController extends BaseController
 
     public function actionDelete($id)
     {
-        $deleteUser = User::deleteUser($id);
+        if ($id) {
+            $deleteUser = User::deleteUser($id);
+            $this->redirect('/users/');
+        }
+        
     }
 
    

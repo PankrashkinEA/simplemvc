@@ -33,7 +33,6 @@ class Router
 
                 // Получаем внутренний путь из внешнего согласно правилу
                 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
-
                 // Определить контроллер, action, параметры
                 $segments = explode('/', $internalRoute);
 
@@ -58,7 +57,6 @@ class Router
                 $controllerObject = new $controllerName;
 
                 $result = call_user_func_array(array($controllerObject, $actionName), $parametres);
-
                 // var_dump($controllerObject);
                 // var_dump($actionName);
                 // var_dump($parametres);
