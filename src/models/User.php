@@ -76,17 +76,12 @@ class User
         $department_id = $_POST['department_id'];
         $birthday = $_POST['birthday'];
         // Запрос к бд
-        // $result = $db->prepare("INSERT INTO users
-        //                       (name, (SELECT name from department 
-        //                        WHERE department.id = users.department_id) AS department_name, birthday)
-        //                        VALUES(?, ?, ?);");
-        // $execute = $result->execute([$name, $department_id, $birthday]);
+
         $result = $db->prepare("INSERT INTO users
             (name, department_id, birthday)
              VALUES(?, ?, ?);");
         $execute = $result->execute([$name, $department_id, $birthday]);
         
-        // var_dump($execute);
         return $execute;
         
     }

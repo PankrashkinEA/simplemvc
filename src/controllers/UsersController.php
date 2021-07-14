@@ -43,7 +43,6 @@ class UsersController extends BaseController
             $departmentList = Department::getDepartmentList();
             if($_POST){
                 User::updateUser($id);
-                // var_dump($_POST);
                 $this->redirect('/users/');
             }
             require_once(ROOT. '/views/users/userupdate.php');
