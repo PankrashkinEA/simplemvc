@@ -31,7 +31,7 @@
         </div>
         <button type="submit">Создаём?</button>
         
-        <a href="users">Передумал</a>
+        <a href="/users">Передумал</a>
       </form>
     </body>
 </html>
