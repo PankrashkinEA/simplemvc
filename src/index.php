@@ -1,4 +1,6 @@
 <?php 
+session_start();
+// var_dump($_SESSION['name']);
 // Работа с регулярками
 // $string = '21-11-2015';
 // $pattern = '/([0-9]{2})-([0-9]{2})-([0-9]{4})/';
@@ -28,5 +30,7 @@ include_once 'autoloader.php';
 // 4. Вызов Router
 
 $router = new Router();
+$router->isSession();
 $router->run();
+
 

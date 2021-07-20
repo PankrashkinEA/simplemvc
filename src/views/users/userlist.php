@@ -23,6 +23,7 @@
             <th>Создан</th>
             <th>Что делаем?</th>
             <th><a href="/departments/">Департаменты?</th>
+            <th><a href="/logout">Выходим</a></th>
           </tr>
         </thead>
         <tbody>
@@ -36,12 +37,12 @@
                 <th><a href="/user/<?= $user['id'];?>">Просмотр</a></th>
                 <th><a href="/user/update/<?= $user['id'];?>">Редактировать</a></th>
                 <th><a href="/user/delete/<?= $user['id'];?>">Удалить</a></th>
-                <th></th>
               </tr>
           <?php } ?>
         </tbody>
       </table>
       <br/><button type="button" class="btn btn-success"><a href="/user/create">Создать</a></button>
+      
     </div>
   
 </html>

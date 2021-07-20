@@ -118,4 +118,29 @@ class User
         }
     }
 
+    public static function loginUser()
+    {
+        // Метод создания юзера
+        if(isset($_POST['name']))
+        {
+        // Инициализируем подключение
+        $db = Db::getConnection();
+        // Создаём переменные полей ввода
+        $name = $_POST['name'];
+        // Запрос к бд
+        $result = $db->prepare('SELECT name FROM users WHERE name = ?');
+        $result->bindValue(1, $name);
+        $result->execute();
+        $user = $result->fetch();
+        
+        if(empty($name))
+        {
+            return false;
+        }
+        $_SESSION['user'] = $user;
+
+        }
+        
+    }
+
 }

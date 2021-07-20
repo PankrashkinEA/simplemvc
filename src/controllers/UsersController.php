@@ -56,6 +56,4 @@ class UsersController extends BaseController
         }
         
     }
-
-   
 }
