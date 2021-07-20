@@ -11,6 +11,13 @@ class Router
         $this->routes = include($routesPath);
     }
 
+    public function isSession()
+    {
+        if(!isset($_SESSION['user']) && $_SERVER['REQUEST_URI'] != "/login") {
+            header('Location: /login');
+        }
+    }
+    
     private function getURI()
     {
 

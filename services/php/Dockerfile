@@ -33,7 +33,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # XDEBUG
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
-#PHP pecl redis
+# PHP PECL REDIS
 RUN pecl install -o -f redis
 
 # SET USER

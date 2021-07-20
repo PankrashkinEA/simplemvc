@@ -13,4 +13,7 @@
         'department/delete/([0-9]+)' => 'department/delete/$1', // actionDelete - Удаляем департамент
         'department/create' => 'department/create', //actionCreate - Создаём новый департамент
         'departments' => 'department/index', //actionIndex в DepartmentController
+
+        'login' => 'auth/login', // actionLogin
+        'logout' => 'auth/logout', // actionSign
     );
