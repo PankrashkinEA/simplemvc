@@ -3,37 +3,38 @@ include_once ROOT . '/components/Db.php';
 
 class Department
 {
-    public static function getDepartmentList(){
+    public static function getDepartmentList()
+    {
         $db = Db::getConnection();
 
         $departmentList = [];
 
         $result = $db->query("SELECT * FROM department ORDER BY id");
 
-        while($row = $result->fetch()){
+        while ($row = $result->fetch()) {
             $departmentList[] = $row;
         }
-        
+
         return $departmentList;
     }
 
     public static function getDepartmentById($id)
     {
         $id = intval($id);
-        
-        if($id){
-            
+
+        if ($id) {
+
             $db = Db::getConnection();
-        
-            $result = $db->query('SELECT id, name
+
+            $result = $db->query(
+                'SELECT id, name
                                   FROM department 
-                                  WHERE id = '. $id
-                                  );
+                                  WHERE id = ' . $id
+            );
             $result->setFetchMode(PDO::FETCH_ASSOC);
             $departmentItem = $result->fetch();
 
             return $departmentItem;
-
         }
     }
 
@@ -51,8 +52,6 @@ class Department
                                VALUES(?);");
         $execute = $result->execute([$name]);
         return $execute;
-        
-
     }
 
     public static function updateDepartment($id)
@@ -60,28 +59,25 @@ class Department
         $id = intval($id);
 
 
-            $db = Db::getConnection();
-            
-            $name = $_POST['name'];
-            $result = $db->prepare("UPDATE department 
+        $db = Db::getConnection();
+
+        $name = $_POST['name'];
+        $result = $db->prepare("UPDATE department 
             SET name=?
             WHERE id = {$id};");
-            $execute = $result->execute([$name]);
-            return $execute;
-
-
+        $execute = $result->execute([$name]);
+        return $execute;
     }
 
     public static function deleteDepartment($id)
     {
         $id = intval($id);
 
-        if($id){
-            
+        if ($id) {
+
             $db = Db::getConnection();
-        
+
             $result = $db->query("DELETE FROM department WHERE id = {$id}");
-            
         }
     }
 }

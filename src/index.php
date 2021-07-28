@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 // var_dump($_SESSION['name']);
 // Работа с регулярками
@@ -32,5 +32,3 @@ include_once 'autoloader.php';
 $router = new Router();
 $router->isSession();
 $router->run();
-
-
