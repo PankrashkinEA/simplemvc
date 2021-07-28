@@ -37,7 +37,6 @@
 //         console.log('2')
 //     }, 3000)
 
-    
 // })
 // p2.then((data)=> {
 //     return new Promise((resolve, reject) => {
@@ -60,8 +59,6 @@
 
 // f().then(alert);
 
-
-
 // const d = new Promise((resolve, reject) => {
 //         setTimeout(() => {
 //             alert('выполнилось через 3 секунды');
@@ -69,7 +66,7 @@
 //         resolve();
 // }).then();
 // function delay(ms) {
-    
+
 //   }
-  
+
 //   delay(3000).then(() => alert('выполнилось через 3 секунды'));
